@@ -1,0 +1,470 @@
+
+\فصل{بررسی مسئله}
+\صفحه‌جدید
+\قسمت{تعریف مسئله}
+\زیرقسمت{هندسه مسئله}
+با توجه به هدف مسئله که بررسی جریان مارپیچ در فضای بین دو سیلندر هم‌مرکز است، هندسه مسئله نیز به صورتی که در شکل\رجوع{شکل:هندسه۱}
+تعریف شده است بررسی می‌شود
+
+\شروع{شکل}[ht]
+\وسط‌چین
+\includegraphics[scale=0.3]{"/home/erfan/Videos/advanced_fluid/Project/figures/geom1.png"}
+\شرح{هندسه مسئله}
+\برچسب{شکل:هندسه۱}
+\پایان{شکل}
+در این مسئله دو پارامتر $\beta$  و $\alpha$ تعریف می‌شود که $\beta$ محل بیشینه سرعت محوری و $\alpha$ نسبت‌اندازه شعاع خارجی به داخلی است.
+\begin{equation*}
+	\alpha = \frac{R_i}{R_o}
+\end{equation*}
+ابعاد و‌اندازه‌های درنظرگرفته شده و موردکاربرد در حل مسئله نیز در شکل
+\ref{fig:geom2}
+آورده شده است.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.3]{../figures/geom2}
+	\caption{ابعاد و‌اندازه‌ها}
+	\label{fig:geom2}
+\end{figure}
+\زیرقسمت{\hlc{مدل \لر{UCM}}}
+هدف از این نوآوری برای حل مسئله بررسی نتایج تفاوت پارامتر‌های غیرخطی افزوده شده در مدل
+\لر{PTT}
+نسبت به مدل‌های ساده تری مانند مدل
+\لر{UCM}
+بوده است.
+در مدل
+\لر{UCM}
+تانسور تنش به صورت غیرصریح به صورت معادله \رجوع{ucm} بیان می‌شود که بالانویس 
+\لر{p} اشاره‌گر به این است که تنش‌ها و ویسکوزیته مربوط به بخش پلیمری سیال است و نه بخش محلول آن.
+روش  حل تحلیلی به کار رفته در مقاله اصلی به صورت استخراج معادلات غیر خطی با استفاده از فرضیات و سپس حل دستگاه معادلات به‌ دست آمده به روش‌های عددیست.
+\cite{old}
+\begin{equation}
+	\label{ucm}
+	\mathbf{T}^{p}+\lambda\left(\frac{\partial \mathbf{T}^{p}}{\partial t}+\overset{\bigtriangledown}{\mathbf{T}^{p}}\right)=2 \eta_{p} \mathbf{D}	
+\end{equation}
+
+در این رابطه علامت 
+$
+\bigtriangledown
+$
+تحت عنوان مشتق
+\lr{upper-convective}
+طبق رابطه زیر تعریف می‌شود.
+\begin{equation}
+		\overset{\bigtriangledown}{\mathbf{T}} = (\mathbf{v}.\nabla)\mathbf{T}-\mathbf{T}(\nabla \mathbf{v}) - (\nabla \mathbf{v})^T\mathbf{T}
+\end{equation}
+\زیرقسمت{فرضیات}
+فرضیات درنظرگرفته شده به منظور حل این مسئله عبارت است از
+\شروع{فقرات}
+\فقره جریان پایا
+\فقره جریان آرام
+\فقره خطوط جریان موازی
+\فقره جریان توسعه یافته
+\فقره تقارن محوری
+\فقره همدما بودن جریان
+\پایان{فقرات}
+\زیرقسمت{معادلات حاکم بر مسئله}
+
+معادلات حاکم بر این مسئله شامل معادله مومنتوم،‌ معادله پیوستگی و معادله مشخصه است، که در دستگاه مختصات استوانه‌ای تعریف میگردند.
+\begin{equation}
+	\frac{1}{r} \frac{\partial\left(r u_{r}\right)}{\partial r}+\frac{1}{r} \frac{\partial\left(u_{\theta}\right)}{\partial \theta}+\frac{\partial u_{z}}{\partial z}=0
+\end{equation}
+معادله مومنتوم مورد استفاده، معادله کشی به صورت زیر است.
+\begin{equation}
+	\rho\frac{Du}{Dt} = -\nabla p + \nabla . \tau
+\end{equation}
+مومنتوم در جهت $r$
+\begin{equation}
+	\begin{split}
+		&\frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} + \frac{\nu}{r} \frac{\partial u_r}{\partial\theta} + u \frac{\partial u_r}{\partial z} - \frac{\nu^2}{r}\\
+		&= -\frac{1}{\rho} \frac{\partial P}{\partial r} + \frac{1}{r\rho}\frac{\partial\left(r\tau_{rr}\right)}{\partial r} + \frac{1}{r\rho} \frac{\partial\tau_{\theta r}}{\partial\theta} + \frac{1}{\rho} \frac{\partial\tau_{zr}}{\partial z} - \frac{\tau_{\theta\theta}}{r\rho} 
+	\end{split}
+\end{equation}
+\\
+مومنتوم در جهت $\theta$
+\begin{equation}
+	\begin{split}
+		&\frac{\partial \nu}{\partial t} + \nu \frac{\partial \nu}{\partial r} + \frac{\nu}{r} \frac{\partial \nu}{\partial\theta} + u \frac{\partial \nu}{\partial z} + \frac{\nu \nu}{r}\\
+		&= -\frac{1}{r\rho} \frac{\partial P}{\partial\theta} + \frac{1}{r\rho}\frac{\partial\tau_{\theta \theta}}{\partial\theta} + \frac{1}{r^2 \rho} \frac{\partial\left(r^2 \tau_{r\theta}\right)}{\partial r} + \frac{1}{\rho} \frac{\partial\tau_{z\theta}}{\partial z} 
+	\end{split}
+\end{equation}
+\\
+مومنتوم در جهت $z$
+\begin{equation}
+	\begin{split}
+\frac{\partial u}{\partial t} + \nu \frac{\partial u}{\partial r} + \frac{\nu}{r} \frac{\partial u}{\partial\theta} + u \frac{\partial u}{\partial z}
+= -\frac{1}{\rho} \frac{\partial P}{\partial z} + \frac{1}{\rho} \frac{\partial\tau_{zz}}{\partial z} + \frac{1}{r\rho}\frac{\partial\tau_{\theta z}}{\partial\theta} + \frac{1}{r\rho}\frac{\partial\left(r\tau_{rz}\right)}{\partial r}
+	\end{split}
+\end{equation}
+با توجه به فرضیات روابط مومنتوم به صورت زیر ساده می‌شوند:
+\\
+مومنتوم در جهت $r$
+\begin{equation}
+	\label{rmom}
+	\begin{split}
+		- \frac{\nu^2}{r}
+		= -\frac{1}{\rho} \frac{\partial P}{\partial r} + \frac{1}{r\rho}\frac{\partial\left(r\tau_{rr}\right)}{\partial r} - \frac{\tau_{\theta\theta}}{r\rho} 
+	\end{split}
+\end{equation}
+\\
+مومنتوم در جهت $\theta$
+\begin{equation}
+	\label{tetmom}
+	\begin{split}
+		0
+		= \frac{\partial\left(r^2 \tau_{r\theta}\right)}{\partial r}
+	\end{split}
+\end{equation}
+\\
+مومنتوم در جهت $z$
+\begin{equation}
+	\label{zmom}
+	\frac{1}{r} \frac{\mathrm{d}\left(r \tau_{r z}\right)}{\mathrm{d} r}=\frac{\partial p}{\partial z}
+\end{equation}
+\begin{multicols}{2}
+معادلات مشخصه نیز به صورت زیر ساده می‌شوند.
+\begin{eqnarray}
+\tau_{rr} &= 0 \label{112}\\
+\tau_{zz} &= 2\lambda\eta(\frac{du}{dr})^2\\
+\tau_{\theta \theta} &= 2\lambda\eta\left(r\frac{d\left(\nu/r\right)}{dr}\right)^2
+\end{eqnarray}
+
+\begin{eqnarray}
+	\tau_{r \theta} &= r\eta \frac{d\left(\nu /r\right)}{dr}\label{142}\\
+	\tau_{rz} &= \eta \frac{du}{dr} \label{15-2}\\
+	\tau_{\theta z} &= 2\lambda\eta r \frac{du}{dr}\frac{d\left(\nu /r\right)}{dr}
+\end{eqnarray}
+\end{multicols}
+با وارد کردن پارامتر گشتاور بر واحد طول $M$ معادله زیر حاصل می‌شود.
+\begin{equation}
+\label{taurtheta}
+\tau_{r \theta} = \frac{M}{2\pi r^2}
+\end{equation}
+حال اگر رابطه
+\ref{taurtheta}
+در رابطه 
+\ref{142}
+قرار داده شود برای سرعت شعاعی معادله دیفرانسیل زیر به دست خواهد‌ آمد.
+\begin{equation}
+	\label{15}
+	r\frac{d}{dr}\left(\frac{\nu}{r}\right) = \frac{M}{2\pi\eta r^2}
+\end{equation}
+%با قرار دادن رابطه به دست آمده در رابطه 
+%\ref{1-8}
+%المان تنش $\tau_{\theta \theta}$ بدین صورت به دست می‌آید
+%\begin{equation}
+%	\label{1-15}
+%	\tau_{\theta \theta} = \frac{\lambda M^2}{2\pi ^2 \eta r^4}
+%\end{equation}
+%حال اگر رابطه 
+%\ref{1-15}
+%در مولفه شعاعی مومنتوم 
+%\ref{1-10}
+%قرار داده شود. رابطه توزیع شعاعی فشار به صورت زیر به دست می‌آید
+%\begin{equation}
+%	\label{16}
+%	r\frac{\partial p}{\partial r} = \rho \nu ^2 - \frac{\lambda M^2}{2\pi ^2\eta r^4}
+%\end{equation}
+%همانطور که مشخص است این رابطه وابسته به مولفه شعاعی سرعت نیز هست. بنابراین با به دست آوردن مولفه شعاعی سرعت توزیع شعاعی فشار نیز به دست می‌آید.
+اگر از معادله
+\ref{zmom}
+انتگرال گرفته شود رابطه زیر حاصل می‌شود.
+\begin{equation}
+	\label{17}
+	\tau_{r z} = \frac{\partial p }{\partial z}\frac{r}{2} + \frac{c_2}{r}
+\end{equation}
+و از مساوی قرار دادن رابطه 
+\ref{17}
+با رابطه  
+\ref{15-2}
+رابطه
+\ref{18}
+به دست می‌آید.
+\begin{equation}
+	\label{18}
+	\eta \frac{du}{dr} = \frac{\partial p }{\partial z}\frac{r}{2} + \frac{c_2}{r}
+\end{equation}
+حال 
+با فرض اینکه تنش برشی $\tau_{r z}$ در $r = \beta R$ برابر صفر باشد. ثابت انتگرال‌گیری $c_2 $ به دست می‌آید و با جایگذاری در رابطه  
+\ref{17} 
+نتیجه خواهدشد
+\begin{equation}
+	\tau_{r z} = \frac{1}{2}\frac{\partial p \beta R}{\partial z}\left(\frac{\beta R}{r}-\frac{r}{\beta R}\right)
+\end{equation}
+\\
+در ادامه به جهت خلاصه نویسی و تطابق با متن مقاله به جای 
+$\frac{\partial p}{\partial z}$
+از
+$p_z$
+استفاده می‌شود.
+در نهایت رابطه گرادیان مولفه‌های سرعت در جهت $z$ و $\theta$ به صورت رابطه‌های
+\ref{19}
+و
+\ref{20} 
+به دست می‌آیند.
+
+\begin{equation}
+	\label{19}
+		\eta \frac{du}{dr} = \left[-\frac{p_{z} \beta R}{2}\left(\frac{\beta R}{r}-\frac{r}{\beta R}\right)\right]
+\end{equation}
+\begin{equation}
+	\label{20}
+	r\frac{d}{dr}\left(\frac{\nu}{r}\right) = \frac{M}{2\pi\eta r^2}
+\end{equation}
+%\زیرقسمت{بی‌ بعد سازی متغیرها}
+%اگر سرعت میانگین سطح مقطع را $U$، و سرعت مشخصه شعاعی را به صورت 
+%\begin{equation}
+%	U_{T}=\frac{M}{\pi \eta \zeta}
+%\end{equation}
+%در نظر بگیریم که در آن پارامتر $\zeta$ به عنوان طول مشخصه به صورت زیر تعریف شده باشد:
+% \begin{equation}
+% 	\zeta = R - \alpha R = R(1-\alpha)
+% \end{equation}
+%می‌توان اعداد بدون بعد زیر را تعریف کرد
+%\begin{equation}
+%	De = \frac{\lambda U}{\zeta}
+%\end{equation}
+%\begin{equation}
+%	De_T = \frac{\lambda U_T}{\zeta}
+%\end{equation}
+%\begin{equation}
+%	\bar{p}_z = \frac{p_z \zeta ^2}{\eta U}
+%\end{equation}
+%\begin{equation}
+%	\bar{u}  = \frac{u}{U}
+%\end{equation}
+%\begin{equation}
+%	\bar{\nu} = \frac{\nu}{U}
+%\end{equation}
+%\begin{equation}
+%	\bar{r} = \frac{r}{\zeta}
+%\end{equation}
+حال معادله گرادیان سرعت در راستای محوری و مماسی را به صورت بی بعد بازنویسی میکنیم.
+\begin{equation}
+	\label{dudr}
+	\frac{\mathrm{d} \bar{u}}{\mathrm{~d} \bar{r}}=\left[-\frac{\bar{p}_{z} \beta \bar{R}}{2}\left(\frac{\beta \bar{R}}{\bar{r}}-\frac{\bar{r}}{\beta \bar{R}}\right)\right]
+\end{equation}
+\begin{equation}
+	\label{dnudr}
+	\frac{\mathrm{d}(\bar{\nu} / \bar{r})}{d \bar{r}}=\frac{U_{T}}{U} \frac{1}{2 \bar{r}^{3}}
+\end{equation}
+حال از روابط 
+\ref{dudr}
+و 
+\ref{dnudr}
+انتگرال گرفته می‌شود و پروفیل شعاعی و مماسی سرعت به دست می‌آید.
+\begin{equation}
+	\label{uC}
+	\bar{u}(\bar{r}) = \bar{u_a}(\bar{r}) + \bar{c_b}
+\end{equation}
+\begin{equation}
+	\label{nuC}
+	\bar{\nu}(\bar{r}) = \bar{r}\bar{\nu_a}(\bar{r}) + \bar{c_c}\bar{r}
+\end{equation}
+که در این روابط پارامتر $\bar{u_a}(\bar{r})$ بدین صورت به دست آمده است.
+\begin{equation}
+	\label{uwithc}
+	\bar{u_a}(\bar{r}) = \frac{r^{2} \bar{p}_{z}}{4}-\frac{\beta^{2} \bar{R}^{2} \bar{p}_{z} \ln (\bar{r})}{2}
+\end{equation}
+\begin{equation}
+	\label{nuwithc}
+	\bar{\nu}_a(\bar{r})=-\frac{U_{T}}{4 r^{2} U}
+\end{equation}
+به منظور به دست آوردن ثابت‌های انتگرال‌گیری باید شرایط مرزی در معادلات اصلی جایگذاری شوند.
+\زیرقسمت{شرایط مرزی}
+شرط مرزی لغزش سرعت محوری بر روی مرز سیلندر داخلی را می‌توان به این صورت تعریف کرد
+\begin{equation}
+	u(\alpha R)=k_{i}\left|\tau_{r z}\right|^{m_{i}-1} \tau_{r z}
+\end{equation}
+و شرط مرزی لغزش روی مرز سیلندر خارجی به صورت زیر تعریفمی‌گردد.
+\begin{equation}
+	u(R)=-k_{o}\left|\tau_{r z}\right|^{m_{o}-1} \tau_{r z}
+\end{equation}
+که در این روابط ثابت‌های $k$ و $m$ به ترتیب بیانگر ثابت قانون لغزش و توان قانون لغزش هستند و در هرکدام از شرایط مرزی روی سیلندر داخلی و خارجی می‌توانند مقادیر مختلفی داشته باشند. در این روابط پاورقی $i$ و $o$ به ترتیب اشاره‌گر به سیلندر داخلی و خارجی هستند. این شرایط مرزی را می‌توان به صورت بدون بعد نوشت.
+\begin{equation}
+	\label{innerbc}
+		\bar{u}(\alpha \bar{R})=\bar{k}_{i}\left[-\bar{p}_{. z} \frac{\beta \bar{R}}{2}\left(\frac{\beta}{\alpha}-\frac{\alpha}{\beta}\right)\right]^{m_{i}}
+\end{equation}
+\begin{equation}
+	\label{outerbc}
+		\bar{u}(\bar{R})=\bar{k}_{o}\left[\bar{p}_{z} \frac{\beta \bar{R}}{2}\left(\beta-\frac{1}{\beta}\right)\right]^{m_{o}}
+\end{equation}
+%که در این روابط 
+%\begin{equation*}
+%	\bar{k}_{i}=\left(\frac{k_{i} \eta}{\zeta}\right)\left(\frac{|U|\eta} {\zeta}\right)^{m_{i}-1}
+%\end{equation*}
+%\begin{equation*}
+%	 \bar{k}_{o}=\left(\frac{k_{o} \eta}{\zeta}\right)\left(\frac{|U| \eta}{\zeta}\right)^{m_{o}-1}
+%\end{equation*}
+با قرار دادن شرط مرزی
+\ref{innerbc}
+در معادله 
+\ref{uwithc}
+مقدار ضریب $c_b$ به دست آمده و رابطه بی بعد سرعت محوری به صورت زیر به دست می‌آید.
+\begin{equation}
+	\label{27}
+	\bar{u}(\bar{r})=\bar{u}_{a}(\bar{r})-\bar{u}_{a}(\alpha \bar{R})+\bar{k}_{i}\left[-\bar{p}_{z} \frac{\beta \bar{R}}{2}\left(\frac{\beta}{\alpha}-\frac{\alpha}{\beta}\right)\right]^{m_{i}}
+\end{equation}
+حال برای محاسبه پارامتر $\beta$ شرط مرزی
+\ref{outerbc}
+در معادله قرار داده می‌شود.
+\begin{equation}
+	\label{f1}
+	\begin{aligned}
+		f_{1}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right) =  &  \bar{u}_{a}(\bar{R})-\bar{u}_{a}(\alpha \bar{R})+\bar{k}_{i}\left[-\bar{p}_{z} \frac{\beta \bar{R}}{2}\left(\frac{\beta}{\alpha}-\frac{\alpha}{\beta}\right)\right]^{m_{i}} \\
+		&-\bar{k}_{o}\left[\bar{p}_{z} \frac{\beta \bar{R}}{2}\left(\beta-\frac{1}{\beta}\right)\right]^{m_{o}}=0
+	\end{aligned}
+\end{equation}
+حال اگر رابطه پروفیل سرعت محوری در رابطه
+\ref{f1}
+جایگذاری شود برای  $m_i=m_o= m$‌های مختلف روابط زیر به دست می‌آید.
+\\
+برای $ m = 1$
+\begin{equation}
+	\begin{aligned}
+		\label{f1_1}
+		&f_{1}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right) =\\
+		&\frac{R p_{z} \left(\alpha \left(- R \left(\alpha^{2} - 2 \beta^{2} \log{\left(R \alpha \right)}\right) - R \left(2 \beta^{2} \log{\left(R \right)} - 1\right) + 2 k_{o} \left(\beta^{2} - 1\right)\right) + 2 k_{i} \left(\alpha^{2} - \beta^{2}\right)\right)}{4 \alpha}
+	\end{aligned}	
+\end{equation}
+\hlc{اگر رابطه بالا به صورت صریح بر حسب پارامتر $\beta$ نوشته شود}
+\begin{equation}
+	\beta = \left[\frac{\alpha \left(- R \alpha^{2} + R + 2 \alpha k_{i} - 2 k_{o}\right)}{2 \left(R \alpha \log{\left(R \right)} - R \alpha \log{\left(R \alpha \right)} - \alpha k_{o} + k_{i}\right)}\right]^\frac{1}{2}
+\end{equation}
+
+برای $m = 2$ و $m=3 $ نیز پارامتر $\beta$ به صورت صریح محاسبه می‌شود.
+حال برای به دست آوردن پارامتر‌های افت فشار و پروفیل سرعت محوری و مماسی از یک رابطه دیگر برای محاسبه سرعت محوری میانگین استفاده می‌شود.
+\begin{equation}
+	U=\frac{1}{\pi R^{2}\left(1-\alpha^{2}\right)} \int_{\alpha R}^{R} u(r) 2 \pi r d r
+\end{equation}
+حال اگر این رابطه به صورت بدون بعد نوشته شود:
+\begin{equation}
+	\label{aveU}
+	\frac{2}{\bar{R}^{2}\left(1-\alpha^{2}\right)} \int_{\alpha \bar{R}}^{\bar{R}} \bar{u}(\bar{r}) \bar{r} d \vec{r}-1=0
+\end{equation}
+\hlc{اگر با استفاده از رابطه 
+\ref{uwithc}
+از رابطه 
+\ref{aveU}
+انتگرال گرفته شود رابطه زیر به دست می‌آید:}
+%\begin{landscape}
+%		\begin{sidewaysfigure}
+%	\tiny
+	\begin{equation}
+		\begin{aligned}
+		&f_{2}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right) =\\
+		&\frac{1}{\alpha^2-1}(- \frac{R^{2} \alpha^{4} p_{z}}{8} + \frac{R^{2} \alpha^{2} \beta^{2} p_{z}}{4} + \frac{R^{2} \alpha^{2} p_{z}}{4} + \frac{R^{2} \beta^{2} p_{z} \log{\left(R \right)}}{2} - \frac{R^{2} \beta^{2} p_{z} \log{\left(R \alpha \right)}}{2} - \frac{R^{2} \beta^{2} p_{z}}{4} - \frac{R^{2} p_{z}}{8} +\\ &\alpha^{2} k_{i} \left(\frac{R p_{z} \left(\alpha^{2} - \beta^{2}\right)}{2 \alpha}\right)^{m_{i}} - \alpha^{2} - k_{i} \left(\frac{R p_{z} \left(\alpha^{2} - \beta^{2}\right)}{2 \alpha}\right)^{m_{i}} + 1)
+	\end{aligned}
+	\end{equation}
+%	\end{sidewaysfigure}
+حال به منظور به دست آوردن پارامتر ثابت $C_c$ در رابطه
+\ref{nuC}
+شرط مرزی لغزش برای سیلندر داخلی
+\begin{equation}
+	\nu(\alpha R) = \omega \alpha R + k_{\nu i}||\tau_{r \theta}||^{m_{\nu i}-1}\tau_{r \theta}
+\end{equation}
+و همچنین برای سیلندر خارجی
+\begin{equation}
+	\nu(R) = k_{\nu o}||\tau_{r \theta}||^{m_{\nu o}-1}\tau_{r \theta}
+\end{equation}
+در پروفیل سرعت شعاعی اعمال می‌شوند. بدین منظور لازم است که ابتدا این شرایط مرزی به صورت بی بعد نوشته شوند.
+\begin{equation}
+	\label{nu_alphaR}
+	\bar{v}(\alpha \bar{R})=\bar{\omega} \alpha \bar{R}+\bar{k}_{v i} \frac{\left|\frac{U_{T}}{U}\right|^{m_{\nu j}-1}\left(\frac{U_{T}}{U}\right)}{(\alpha \bar{R})^{2 m_{t i}}}
+\end{equation}
+\begin{equation}
+	\label{nu_R}
+	\bar{v}(\bar{R})=-\bar{k}_{\nu o} \frac{\left|\frac{U_{T}}{U}\right|^{m_{\nu o}-1}\left(\frac{U_{T}}{U}\right)}{(\bar{R})^{2 m_{k o}}}
+\end{equation}
+%که در این روابه پارامتر‌ها بدین صورت بدون بعد شده‌اند.
+%\begin{equation*}
+%	\bar{k}_{\nu i}=\frac{k_{\nu i}}{|U|}\left(\frac{\eta|U|}{2 \zeta}\right)^{m_{\nu i}}
+%\end{equation*}
+%\begin{equation*}
+%	\bar{k}_{\nu o}=\frac{k_{\nu o}}{|U|}\left(\frac{\eta|U|}{2 \zeta}\right)^{m_{\nu o}}
+%\end{equation*}
+%\begin{equation*}
+%	\bar{\omega}=\frac{\omega \zeta}{U}
+%\end{equation*}
+مقادیر ثابت‌های لغزش در شرط مرزی‌ها برای سرعت‌های محوری و مماسی می‌تواند با یکدیگر متفاوت باشند.
+\\
+حال می‌توان پروفیل سرعت مماسی را به دست آورد.
+\begin{equation}
+	\label{nu_profile}
+	\bar{v}(\bar{r})=\bar{r} \bar{v}_{r}(\bar{r})-\bar{r} \bar{v}_{r}(\bar{R})-\bar{k}_{\nu_{o}} \frac{\left|\frac{U_{T}}{U}\right|^{m_{\nu o}-1}\left(\frac{U_{T}}{U}\right)}{(\bar{R})^{2 m_{\nu_{o}}}} \frac{\bar{r}}{\bar{R}}
+\end{equation}
+\hlc{با قرار دادن رابطه
+\ref{nu_alphaR}
+در رابطه 
+\ref{nu_profile}
+سومین معادله اصلی حاصل می‌شود:}
+\begin{equation}
+	\begin{aligned}
+		f_{3}\left(\frac{U_{T}}{U}, \bar{p}_{, z}, \beta\right) \equiv & \bar{v}_{r}(\alpha \bar{R}) \alpha \bar{R}-\bar{v}_{r}(\bar{R}) \alpha \bar{R}-\bar{k}_{\nu o} \frac{\left|\frac{U_{T}}{U}\right|^{m_{\nu o}-1}\left(\frac{U_{T}}{U}\right)}{(\bar{R})^{2 m_{\nu o}}} \alpha \\
+		&-\left[\bar{\omega} \alpha \bar{R}+\bar{k}_{\nu i} \frac{\left|\frac{U_{T}}{U}\right|^{m_{v i}-1}\left(\frac{U_{T}}{U}\right)}{(\alpha \bar{R})^{2 m_{v i}}}\right]=0
+	\end{aligned}
+\end{equation}
+حال برای به دست آوردن پروفیل‌های سرعت محوری و مماسی و پارامتر‌های افت‌ فشار و $\beta$ میبایست این سه معادله غیرخطی را به صورت همزمان حل کرد.
+\begin{equation}
+	\left\{\begin{array}{l}
+		f_{1}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right)=0 \\
+		f_{2}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right)=0 \\
+		f_{3}\left(\frac{U_{T}}{U}, \bar{p}_{z}, \beta\right)=0
+	\end{array}\right.
+\end{equation}
+\newpage
+\قسمت{\hlc{نتایج}}
+در معادلات به دست‌آمده برای مدل
+\lr{UCM}
+پارامتر 
+$\varepsilon$
+ صفر شده و نتیجتا پارامتر 
+ $\varepsilon De^2$
+ظاهر نمی‌شود. بنابراین مقایسه پارامتر‌ها به صورت نموداری در بعضی موارد ممکن نبوده چرا که داده‌های به دست آمده از مدل 
+\lr{UCM}
+فقط یک نقطه از روی نمودار را نمایش میداد.
+نتایج به دست آمده نشان دهنده این است که مدل
+\lr{UCM}
+در حالت پایا رفتار یک سیال نیوتونی را از خود نشان میدهد از این نظر شاید بتوان گفت که این مدل برای مدل سازی سیالات 
+\lr{Shear Thinning}
+و سیالات
+\lr{Thixotropic}
+مناسب باشد.
+\شروع{شکل}[h!]
+\وسط‌چین
+\includegraphics[scale=0.6]{"/home/erfan/Videos/advanced_fluid/Project/figures/fig5.eps"}
+\شرح{تنش برشی $\tau_{r z}$بر حسب شعاع نسبی برای پارامتر‌های $\alpha = 0.5$ و $m=1$ و $ k_i=k_o=0$ برای مدل خطی و سهمی $PTT$}
+\برچسب{شکل:8}
+\پایان{شکل}
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\includegraphics[scale=0.5]{"/home/erfan/Videos/advanced_fluid/Project/figures/fig8.eps"}
+		\caption{\small
+			پروفیل سرعت محوری نسبت به شعاع با پارامتر‌های $\alpha = 0.5$ و $m=1$ و $ k_i=k_o=k$ برای مدل خطی $PTT$}
+	\end{minipage}\hfill
+	\begin{minipage}{0.45\textwidth}
+		\includegraphics[scale=0.5]{"/home/erfan/Videos/advanced_fluid/Project/figures/fig9a_graph.eps"}
+		\شرح{\small
+			پروفیل سرعت محوری نسبت به شعاع با پارامتر‌های $\alpha = 0.5$ و $m=1$ و $ k_o=0$ برای مدل خطی $PTT$}
+	\end{minipage}
+\end{figure}
+\\
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale=0.6]{"/home/erfan/Videos/advanced_fluid/Project/figures/fig12b_graph.eps"}
+	\شرح{
+		\small
+		پروفیل سرعت بی‌بعد مماسی نسبت به شعاع با پارامتر‌های $\alpha = 0.5$ و $m=1$ و $ k_i=k_o=k$ برای مدل خطی و سهمی $PTT$}
+\end{figure}
+\begin{figure}
+
+\end{figure}
+%\begin{equation}
+%\nu (r) = - \frac{0.125 R^{4} U_{T} r}{U} + \frac{0.125 U_{T} r^{5}}{U} - \frac{R^{- 2 m_{i}} U_{T} k_{o} r \left(\frac{U_{T}}{U}\right)^{m_{o} - 1}}{R U}
+%\end{equation}
+%\begin{equation}
+%	f_3 = \frac{0.125 R^{5} U_{T} \alpha^{5}}{U} - \frac{0.125 R^{5} U_{T} \alpha}{U} - R \alpha \omega - \frac{U_{T} k_{i} \left(R \alpha\right)^{- 2 m_{i}} \left(\frac{U_{T}}{U}\right)^{m_{i} - 1}}{U} - \frac{R^{- 2 m_{i}} U_{T} \alpha k_{o} \left(\frac{U_{T}}{U}\right)^{m_{o} - 1}}{U}
+%\end{equation}
+%\begin{equation}
+%	\frac{0.125 R^{5} U_{T} \alpha^{5}}{U} - \frac{0.125 R^{5} U_{T} \alpha}{U} - 0.1 - \frac{U_{T} k_{i} \left(R \alpha\right)^{- 2 m_{i}} \left(\frac{U_{T}}{U}\right)^{m_{i} - 1}}{U} - \frac{R^{- 2 m_{i}} U_{T} \alpha k_{o} \left(\frac{U_{T}}{U}\right)^{m_{o} - 1}}{U}
+%\end{equation

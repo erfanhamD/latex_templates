@@ -1,0 +1,7 @@
+\contentsline {chapter}{\numberline {1}‌پیش‌پردازش داده‌ها}{1}{chapter.1}%
+\contentsline {section}{\numberline {1-1}اصلاح ساختار پروتئین}{1}{section.1.1}%
+\contentsline {section}{\numberline {1-2}قرار دادن پروتئین در \lr {Water Box}}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}پردازش پروتئین}{5}{chapter.2}%
+\contentsline {section}{\numberline {2-1}ریلکس کردن پروتئین با استفاده از \lr {NAMD} }{5}{section.2.1}%
+\contentsline {section}{\numberline {2-2}اعمال نیروی ثابت به پروتئین}{7}{section.2.2}%
+\contentsline {section}{\numberline {2-3}ایجاد تغییرات در فایل \lr {conf}}{9}{section.2.3}%
